@@ -7,7 +7,8 @@ import Slider from "react-slick";
 import logo from '../../assets/logo.svg';
 import fotoRestaurante from '../../assets/restaurante-fake.png';
 
-import {Wrapper, Container, Logo, Search, Map, CarouselTitle} from './styles';
+import {Wrapper, Container, Logo, Search, CarouselTitle, Carousel, Map} from './styles';
+import {Card} from '../../components';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('')
@@ -36,56 +37,14 @@ const Home = () => {
                         />
                     </TextField>
                     <CarouselTitle>Na sua área</CarouselTitle>
-                    <Slider {...settings}>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                        <div>
-                            <img src={fotoRestaurante} />
-                        </div>
-                    </Slider>
+                    <Carousel {...settings}>
+                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante}/>
+                    </Carousel>
                 </Search>
                 
             </Container>
@@ -93,7 +52,5 @@ const Home = () => {
         </Wrapper>
     )
 }
-
-//const Home = () => <Container>Hello world</Container>
 
 export default Home;
