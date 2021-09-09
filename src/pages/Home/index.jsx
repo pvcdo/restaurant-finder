@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import TextField, {Input} from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
-import Slider from "react-slick";
+//import Slider from "react-slick";
 
 import logo from '../../assets/logo.svg';
 import fotoRestaurante from '../../assets/restaurante-fake.png';
@@ -38,12 +38,12 @@ const Home = () => {
                     </TextField>
                     <CarouselTitle>Na sua área</CarouselTitle>
                     <Carousel {...settings}>
-                        <Card photo={fotoRestaurante}/>
-                        <Card photo={fotoRestaurante}/>
-                        <Card photo={fotoRestaurante}/>
-                        <Card photo={fotoRestaurante}/>
-                        <Card photo={fotoRestaurante}/>
-                        <Card photo={fotoRestaurante}/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
                     </Carousel>
                 </Search>
                 
