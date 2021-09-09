@@ -14,6 +14,7 @@ export const Container = styled.aside`
 
 export const Logo = styled.img`
     margin-bottom: 15px;
+    padding: 0 50px;
 `;
 
 export const Search = styled.section`
@@ -22,6 +23,15 @@ export const Search = styled.section`
     flex-direction: column;
     justify-content: center;
     padding: 16px;
+`;
+
+export const CarouselTitle = styled.h1`
+    font-family: ${(props) => props.theme.fonts.regular};
+    color: ${(props) => props.theme.colors.text};
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 29px;
+    margin: 16px 0;
 `;
 
 export const Map = styled.div`
