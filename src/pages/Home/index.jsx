@@ -8,7 +8,7 @@ import logo from '../../assets/logo.svg';
 import fotoRestaurante from '../../assets/restaurante-fake.png';
 
 import {Wrapper, Container, Logo, Search, CarouselTitle, Carousel, Map} from './styles';
-import {Card} from '../../components';
+import {Card, RestaurantCard} from '../../components';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('')
@@ -46,7 +46,7 @@ const Home = () => {
                         <Card photo={fotoRestaurante} title="restaurante aqui"/>
                     </Carousel>
                 </Search>
-                
+                <RestaurantCard/>                
             </Container>
             <Map/>
         </Wrapper>
