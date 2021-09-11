@@ -8,10 +8,11 @@ import logo from '../../assets/logo.svg';
 import fotoRestaurante from '../../assets/restaurante-fake.png';
 
 import {Wrapper, Container, Logo, Search, CarouselTitle, Carousel, Map} from './styles';
-import {Card, RestaurantCard} from '../../components';
+import {Card, RestaurantCard, Modal} from '../../components';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('')
+    const [modalOpened, setModalOpened] = useState(true)
     
     const settings = {
         dots: false,
@@ -49,6 +50,7 @@ const Home = () => {
                 <RestaurantCard/>                
             </Container>
             <Map/>
+            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>Para parar de abrir o modal automaticamente, trocar de true para false o modalOpened no index da Home</Modal>
         </Wrapper>
     )
 }
