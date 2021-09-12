@@ -50,7 +50,7 @@ const Home = () => {
                 <RestaurantCard/>                
             </Container>
             <Map/>
-            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>Para parar de abrir o modal automaticamente, trocar de true para false o modalOpened no index da Home</Modal>
+            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>Para parar de abrir o modal automaticamente, trocar de true para false o modalOpened no index da Home --- Para fechar o modal, clicar fora ou apertar esc</Modal>
         </Wrapper>
     )
 }
