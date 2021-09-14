@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useSelector } from "react-redux";
 
 import TextField, {Input} from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
@@ -14,6 +15,7 @@ const Home = () => {
     const [inputValue, setInputValue] = useState('')
     const [modalOpened, setModalOpened] = useState(true)
     const [query, setQuery] = useState(null);
+    const {restaurants} = useSelector((state) => state.restaurants);
     
     const settings = {
         dots: false,
@@ -48,15 +50,18 @@ const Home = () => {
                     </TextField>
                     <CarouselTitle>Na sua área</CarouselTitle>
                     <Carousel {...settings}>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
-                        <Card photo={fotoRestaurante} title="restaurante aqui"/>
+                        {restaurants.map((restaurant) => (
+                            <Card 
+                                key={restaurant.place_id}
+                                photo={restaurant.photos ? restaurant.photos[0].getUrl() : fotoRestaurante} 
+                                title={restaurant.name}
+                            />
+                        ))}
                     </Carousel>
                 </Search>
-                <RestaurantCard/>                
+                {restaurants.map((restaurant) => (
+                    <RestaurantCard restaurant={restaurant} />
+                ))}            
             </Container>
             <Map query={query} />
             {/*<Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>Para parar de abrir o modal automaticamente, trocar de true para false o modalOpened no index da Home --- Para fechar o modal, clicar fora ou apertar esc</Modal>*/}
