@@ -8,14 +8,15 @@ import MaterialIcon from "@material/react-material-icon";
 import logo from '../../assets/logo.svg';
 import fotoRestaurante from '../../assets/restaurante-fake.png';
 
-import {Wrapper, Container, Logo, Search, CarouselTitle, Carousel, /*Map*/} from './styles';
+import {Wrapper, Container, Logo, Search, CarouselTitle, Carousel, ModalTitle, ModalContent /*Map*/} from './styles';
 import {Card, RestaurantCard, Modal, Map} from '../../components';
 
 const Home = () => {
     const [inputValue, setInputValue] = useState('')
-    const [modalOpened, setModalOpened] = useState(true)
+    const [modalOpened, setModalOpened] = useState(false)
     const [query, setQuery] = useState(null);
-    const {restaurants} = useSelector((state) => state.restaurants);
+    const [placeId, setPlaceId] = useState(null)
+    const {restaurants, restaurantSelected} = useSelector((state) => state.restaurants);
     
     const settings = {
         dots: false,
@@ -23,8 +24,13 @@ const Home = () => {
         speed: 300,
         slidesToShow: 4,
         slidesToScroll: 2,
-        adaptiveHeight: true
+        adaptiveHeight: true,
     };
+
+    function handleOpenModal(placeId){
+        setPlaceId(placeId)
+        setModalOpened(true)
+    }
 
     function handleKeyPress(e){
         if(e.key === 'Enter'){
@@ -60,11 +66,23 @@ const Home = () => {
                     </Carousel>
                 </Search>
                 {restaurants.map((restaurant) => (
-                    <RestaurantCard restaurant={restaurant} />
+                    <RestaurantCard 
+                        key={restaurant.place_id} 
+                        restaurant={restaurant} 
+                        onClick={() => handleOpenModal(restaurant.place_id)}
+                    />
                 ))}            
             </Container>
-            <Map query={query} />
-            {/*<Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>Para parar de abrir o modal automaticamente, trocar de true para false o modalOpened no index da Home --- Para fechar o modal, clicar fora ou apertar esc</Modal>*/}
+            <Map query={query} placeId={placeId} />
+            <Modal 
+                open={modalOpened} 
+                onClose={() => setModalOpened(!modalOpened)}
+            >
+                <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+                <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+                <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
+                <ModalContent>{restaurantSelected?.opening_hours?.open_now ? 'Aberto agora!!!' : 'Fechado agora...'}</ModalContent>
+            </Modal>
         </Wrapper>
     )
 }

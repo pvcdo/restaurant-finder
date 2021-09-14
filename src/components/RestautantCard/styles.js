@@ -8,6 +8,7 @@ export const Restaurant = styled.div`
     padding: 16px;
     background-color: #ffffff;
     border-left: 5px solid transparent;
+    font-family: ${(props) => props.theme.fonts.fontFamily};
     :hover{
         background-color: ${(props) => props.theme.colors.background};
         border-left-color: ${(props) => props.theme.colors.primary};
@@ -20,16 +21,15 @@ export const RestaurantInfo = styled.div`
 `;
 
 export const Title = styled.span`
-    font-family: ${(props) => props.theme.fonts.regular};
     color: ${(props) => props.theme.colors.text};
-    font-size:24px;
+    font-size:20px;
     font-weight: bold;
     line-height: 29px;
     margin-bottom:10px;
 `;
 
+//font-family: ${(props) => props.theme.fonts.regular};
 export const Address = styled.span`
-    font-family: ${(props) => props.theme.fonts.regular};
     color: ${(props) => props.theme.colors.text};
     font-size: 16px;
     line-height: 19px;
