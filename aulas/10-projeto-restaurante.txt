@@ -1,0 +1,655 @@
+Introdução e estrutura
+
+    projetos\restaurants-search\aulas\estrutura-inicial.PNG
+
+    Pasta public
+
+        A pasta public vem por padrão do npm react-creat-app. Coisas padrões do react.
+
+    Pasta src
+
+        Em src temos assets, são basicamente 3 coisas, logotipo do buscador, uma imagem inicial dos cards (antes de integrar com o google) e um arquivo restaurants-loading.json complexo que serve para fazer um loading do react lori, ferramenta criada pelo airbnb para colocarmos animações do ADOBE AFTER EFECTS (essa animação é a que tem na documentação do lori). 
+
+        Pasta components - todos os componentes que serão utilizados. Textos, cards, botões etc.
+
+        Pasta pages - páginas da aplicação. No primeiro momente é a homepage. Se tivéssemos várias outras páginas, iríamos organizar dentro deste diretório.
+
+        App.js
+
+            É a aplicação raiz. Criado por padrão
+
+        Index.js
+
+            Renderiza o app.js no nosso index.html
+
+    .bablerc
+
+        Transpilador de js para a versão mais compatível
+
+    .editorconfig
+
+        Configurações do editor, seta algumas configurações no editor independente do qual estamos usando (sublime, atom, vs code)
+
+    .eslintrc
+
+        Ele usou o eslintrc para configurar padrões de escrita do projeto, como uso obrigatório de parênteses na declaração de arrow functions e uso de ponto-e-vírgula no final das linhas para padronizar o projeto. Isso é importante quando estamos trabalhando em equipe e queremos padronizar o projeto. Está utilizando o padrão do airbnb.
+
+    .eslintignore
+
+        Pastas e diretórios que queremos que o eslint ignore
+
+    .gitignore
+
+        Coisas que não queremos subir pro repositório remoto.
+
+    jsconfig.json
+
+        Ajuda muito no vs code. Setamos configurações do projeto.
+
+    packge.json
+
+        Onde ficam as dependências do projeto. Scripts, etc... Padrão do react-creat-app.
+
+ ** As instalações de materiais seguem a documentação do npm **
+
+Iniciando desenvolvimento do conteúdo lateral
+
+    Parte 1
+
+        1- Instalar o styled-components
+
+            npm i styled-components
+
+            Neste caso eu estou instalando a dependência style-components dentro do meu node_modules. Essa dependência é um conjunto de funções e variáveis que são usadas para estilizar as páginas react.
+
+        2- Criou em src um arquivo chamado theme.js. 
+            
+            Centraliza as variáveis de estilização das páginas. Assim, fica fácil fazer modificações ou aumentar os padrões para todo o site (escalabilidade).
+
+            As definições a serem usadas no projeto estão em projetos\restaurants-search\aulas\imagens\theme ponto js.PNG
+        
+        3-  Criou index.jsx em src/pages/Home
+
+            projetos\restaurants-search\aulas\imagens\index ponto jsx.PNG
+
+        4- Definição de ThemeProvider no App.js da home
+            
+            1- Em src/App.js fazemos projetos\restaurants-search\aulas\imagens\app ponto js inicial do scr.PNG
+            
+            2- Essa definição faz com que tudo que esteja dentro da tag ThemeProvider receba a propriedade theme como um atributo. Sendo assim, as variáveis usadas em App e as variáveis que App chamar e assim por diante, recebem a propriedade theme.
+
+        5- Criamos em src/pages/Home um arquivo irmão de index.jsx que vai se chamar styles.js com as seguintes definições projetos\restaurants-search\aulas\imagens\styles ponto js.PNG
+
+        6- Vamos em index.jsx e colocamos o seguinte código projetos\restaurants-search\aulas\imagens\novo index ponto jsx.PNG
+
+    Parte 2
+
+        1- Nós podemos utilizar os temas definidos em theme.js para estilizar nossa aplicação. Para isso nós podemos fazer, por exemplo, projetos\restaurants-search\aulas\imagens\theme exemplo.PNG
+
+        2- Vamos resetar todas as estilizações padrão de elementos através da dependência styled-reset
+
+            npm i styled-reset
+
+            Com isso vamos fazer com que os nossos elementos estejam estilizados de acordo com as nossas definições.
+
+        3- Vamos em src/App.js, importamos {Reset} de styled-reset e renderizamos <Reset/> antes de <Home/>
+
+        4- Trocamos em styles.js o nome do elemento a ser estilizado (de div para aside), já que é um menu lateral.
+
+        5- Colocamos nesse elemento o background-color como background do theme. Width: 360px; height: 100vh /* ou seja 100% do viewport na direção da altura */; overflow-y: auto /*vai colocar barra de rolagem quando precisar*/; 
+
+    Parte 3
+
+        1- Criar e exportar a const Search no styles.js, que é uma section.
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 16px;
+            background-color: white;
+            
+        2- Alterar o index.jsx, colocando o Search dentro do Container
+
+        3- ainda em index.jsx, importar a logo projetos\restaurants-search\src\assets\logo.svg e colocar essa logo como imagem dentro de Search
+
+        4- Baixar um pacote para criar o input-text
+
+            npm i @material/react-text-field
+
+        5- Ir em src/index.js e 
+
+            Importar o css do pacote de input-text
+                import '@material/react-text-field/dist/text-field.css'
+
+            Retirar a importação de index.css
+
+        6- Em src/pages/Home/index.jsx fazemos: projetos\restaurants-search\aulas\imagens\logo e pesquisa.PNG, colocando no onChange do input = onChange={(e) => setInputValue(e.target.value)}
+
+    Parte 4 - lupinha
+
+        1- instalar o @material/react-material-icon
+
+        2- importar o css dele no src/index.js (parecido no passo 5 da parte 3)
+
+        3- importar o material para a página de renderização (Home/index.jsx)
+
+        4- escrever o código projetos\restaurants-search\aulas\imagens\link font.PNG no head do public/index.html
+
+        5- em index.jsx colocar trailingIcon como parâmetro do TextField, como demonstrado em Javascript Instantiation da documentação (https://www.npmjs.com/package/@material/react-text-field), trocando delete por search
+
+        6- criar o estilo de img = Logo, colocando margin-bottom: 15px. Importar a tag estilizada Logo para o index.jsx e alterar a tag html img para a Logo.
+
+        7- criar o estilo de div = Wrapper, definindo display: flex e flex-direction: row. Importar para o index.jsx
+
+        8- criar estilo de div Map, background-color: red, width: 500px;
+
+        9- Encapsular todo o conteudo do index.jsx em Wrapper e colocar o Map depois de Container.
+
+Início da implementação do carousel
+
+    Parte 1 (Parte 2 pela aula)
+
+        1- colocar título do carousel
+            1- instalar fonte
+                1- google fonts roboto
+                    medium 500
+                    regular 400
+                    bold 700
+                2- copia o link
+                3- cola link no public/index.html
+
+            2- criar estilo CarouselTitle de h1
+                font-family: ${(props) => props.theme.fonts.regular};
+                color: ${(props) => props.theme.colors.text};
+                font-size: 24px;
+                font-weight: bold;
+                line-height: 29px;
+                margin: 16px 0;
+
+            3- importar CarouselTitle para index.jsx
+
+            4- Usar o CarouselTitle como tag para o texto "Na sua área"
+
+        2- Carousel será usado com  react-slick
+            1- podemos ler a documentação do react-slick npm (https://www.npmjs.com/package/react-slick)
+
+            2- instalar npm i react-slick
+
+            3- instalar npm i slick-carousel
+
+            4- importar css para index.js
+                // Import css files
+                import "slick-carousel/slick/slick.css";
+                import "slick-carousel/slick/slick-theme.css";
+            
+            5- importar Slider de react-slick para index.jsx
+
+            6- colocar const settings do carousel em index.jsx, como está na documentação, colocando também os atributos
+                
+                adaptiveHeight: true.
+
+            7- importar as imagens que queremos usar
+
+            8- colocar abaixo do CarouselTitle a tag Slider, colocando nela divs que vão conter as imagens que queremos usar. 
+                1- temos também que colocar um destructuring com spread de settings como atributo da tag Slider
+
+    Parte 2 (3 da aula)
+
+        1- criar pasta ImageCard na pasta components e criar nela um index.jsx
+
+        2- em components/ImageCard/index.jsx escrever  projetos\restaurants-search\aulas\imagens\imageCard.PNG
+
+        3- criar components/index.js e escrever nele >> export {default as Card} from './ImageCard' <<
+            1- no caso, estamos a partir de components/index.js, exportando com o nome de Card tudo que está sendo exportado como default da pasta ImageCard
+
+            2- isso foi feito para criarmos apenas um nível de import para utilizar os componentes em qualquer lugar da minha aplicação, uma vez que agora é só fazemos o import diretamente pela pasta components.
+
+            3- o components/index.js está funcionando como um gerenciador dos componentes criados. Neste ponto, temos apenas o ImageCard, por enquanto.
+
+        4- em src/pages/Home/index.jsx importar {Card} de src/components.
+
+        5- ainda em index de home, trocar as divs filhas de slider pela tag Card importada de components, passando o nome da imagem como atributo photo
+
+    Parte 3 (continuando carousel)
+
+        1- importar para a página de estilização da home o Slider do react-slick 
+        
+        2- criar um estilo para home de nome Carousel, esse estilo vai ser para a tag Slider, portanto a sintaxe é a seguinte:
+            1- export const Carousel = styled(Slider)`
+                estilos css in js;
+                `;
+            2- o estilo será:
+                .slick-slide{
+                    margin-right: 30px;
+                }
+
+        3- no index da home alterar Slider para Carousel
+
+    Parte 4 (finalizando carousel)
+
+        1- colocar texto de nome de restaurante em cada card
+            
+            1- vamos no index.jsx do components/ImageCard e criamos o estilo Title passando esse Title como innerHTML do Card
+            
+            2- temos que fazer alguns ajustes também em Card
+
+            3- fazemos, pois, em components/ImageCard/index.jsx, as alterações em Card e ImageCard e a criação de Title da seguinte forma:
+
+                1- projetos\restaurants-search\aulas\imagens\criaTitleAlteraCard.PNG
+
+            4- Depois disso, obviamente, incluímos a prop title que será recebida pelo ImageCard em Home/index.jsx
+
+Desenvolvimento de componentes
+
+    Parte 1
+
+        1- criar a pasta components/RestaurantCard e dentro dela index.jsx (index do restaurante lateral) e styles.js (estilo do restaurante lateral)
+
+            1- no documento de estilo do restaurante lateral vamos criar o estilo Restaurant da seguinte forma:
+
+                 projetos\restaurants-search\aulas\imagens\estiloRestauranteLateral.PNG
+
+            2- em index do restaurante lateral fazemos 
+
+                import React from 'react'
+
+                import {Restaurant} from './styles'
+
+                const RestaurantCard = () => <Restaurant/>
+
+                export default RestaurantCard
+
+            3- Em components/index.js fazemos incluímos a importação de RestaurantCard, como fizemos com ImageCard
+
+                import (default as RestaurantCard) from './RestaurantCard'
+
+            4- vamos no index do home e fazemos a importação de RestaurantCard junto com o Card
+
+    Parte 2
+
+        1- criar estilo RestaurantInfo de div para o componente RestaurantCard.
+
+            display: flex;
+            flex-direction: column;
+
+        2- importar a tag RestaurantInfo no index do RestaurantCard e acrescentá-la dentro da tag Restaurant
+
+        3- Dentro de RestaurantInfo, no index do componente RestaurantCard colocar o seguinte texto html
+            
+            <p>Nome do restaurante</p>
+            <p>Avaliação</p>
+            <p>Rua qualquer, n #</p>
+        
+        4- Criar os estilos Title e Address de span para RestaurantCard, importar para index do componente RestaurantCard e colocá-los dentro de RestaurantInfo
+
+            projetos\restaurants-search\aulas\imagens\estilosTitleAddress.PNG
+
+        5- substituir o primeiro e último <p> em RestaurantInfo no index de RestaurantCard com as tags Title e Address, respectivamente
+
+    Parte 3
+
+        1- instalar componente de avaliação por estrelas
+
+            npm i react-rating-stars-component
+
+        2- importar ReactStars from 'react-rating-stars-component'
+
+        3- usar ReactStars no lugar da <p>Avaliação</p> colocando como atributos da tag (https://www.npmjs.com/package/react-rating-stars-component):
+
+            count={5}
+            isHalf //permite que seja exibido uma estrela não completamente cheia
+            activeColor='#e7711c'
+            edit={false} //pois só queremos ver a visualização, não deixar que o número de estrelas seja editado
+            value={4} //inicialmente vamos manter esse valor, pois ainda não estamos integrando
+
+        4- dar um margin-top no <Address> de 10px
+
+        5- import restaurante from assets/restaurante-fake.PNG
+
+        6- criar RestaurantPhoto como estilo de img
+
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius:6px;
+
+        7- no index de RestaurantCard importar RestaurantPhoto, colocar como atributos dessa tag src = {restaurante} e alt = "Foto do restaurante", colocar essa tag depois de RestaurantInfo 
+
+    Parte 4 - criação do modal
+        Consiste na criação de uma tela para uma caixa de diálogo, a ser aberta quando clicarmos em algum restaurante da lista.
+
+        A nova tela, que não está vinculada ao App em si é chamada de portal. A caixa de diálogo é chamada de modal.
+
+        1- vamos em public/index.html e criamos div#modal-root, em body, abaixo da div#root
+
+        2- depois criamos 
+            
+            src/components/Modal/Portal/index.jsx
+
+                projetos\restaurants-search\aulas\imagens\modal portal index.PNG
+
+            src/components/Modal/index.jsx
+
+                projetos\restaurants-search\aulas\imagens\modal index.PNG
+
+            src/components/Modal/styles.js
+
+                projetos\restaurants-search\aulas\imagens\modal styles.png
+
+    Parte 5
+
+        0- Importar Overlay e Dialog de Modal/styles.js
+
+        1- Em Modal/index.jxs fazemos projetos\restaurants-search\aulas\imagens\abrir1 modal index.PNG
+
+            Children é o que será renderizado dentro do modal, é o que está innerHTML da tag Modal. open é o estado de abertura do modal (false se estiver fechado e true, aberto). onClose é uma função que vai alterar o estado do modal (se open estiver false vai transformar em true, se true, false).
+
+            A função onOverlayClick é disparada quando o open === true e é feito (inicialmente) um clique local da página.
+
+            A função onDialogClick é dispara quando o clique é feito na área do modal. Seu efeito é garantir que o efeito de clique seja sentido apenas no modal e não na div que está o encapsulando. 
+
+        2- exportamos Modal a partir de components/index.js
+
+        3- importamos Modal no index da Home.
+
+        4- no index da Home criamos um useState, colocando o estado inicial como true (no caso estou forçando começar a página com o modal aberto, já que não associei sua abertura a nenhum clique, quando fizer isso o certo é alterar esse estado inicial para false).
+
+            const [modalOpened, setModalOpened] = useState(true);
+
+        5- Depois da tag <Map> incluimos a nossa tag <Modal> passando os parâmetros open={modalOpened} e onClose={()=>setModalOpened(!modalOpened)}
+
+        6- Em components/Modal/index.jsx, para fecharmos o modal ao cliclarmos no Esc, criamos um hook do react, para isso damos um import {useEffect} from 'react'
+
+        7- depois colocamos a função useEffect logo abaixo da declaração do Modal conforme projetos\restaurants-search\aulas\imagens\modal onEsc.PNG
+
+Começando a integrar com o google maps
+
+    ******** TIVE QUE VINCULAR UMA CONTA DE PAGAMENTO NO GOOGLE PARA CONSEGUIR EXECUTAR CORRETAMENTE O APP *********
+
+    1- Entrar no painel do console do Google Cloud Platform e criar um projeto
+
+    2- dentro do projeto, clicar no item bibliotecas do menu esquerdo e pesquiso Maps Javascript API e Places API, ativando esses serviços
+    
+    3- depois no menu do projeto vamos em credenciais > criar credenciais > chave de API, e copiamos essa chave
+
+    4- restringimos a chave, colocando apenas o maps e places
+
+    5- criamos um aquivo raiz_projeto/.env, colocando nele REACT_APP_GOOGLE_API_KEY="chave da API" e acrescentamos esse documento .env no .gitignore
+
+        Esse arquivo .env é usado para acessarmos variáveis de ambiente do node quando estamos fazendo o build da aplicação.
+
+Início da implementação do mapa
+
+    1- instalar o google-maps-react
+        npm install --save google-maps-react
+
+    2- criar components/Map/index.jsx
+
+        1- projetos\restaurants-search\aulas\imagens\renderMapa.PNG
+
+            1- O GoogleApiWrapper é o high order component, que passa para o nosso componente o api key e todas as outras props necessárias disponíveis na places Library. GoogleApiWrapper from google-maps-react. Talvez o GoogleApiWrapper seja apenas uma mochila contendo as props e a exportação default no fim do documento seja mesmo de MapContainer e não de GoogleApiWrapper, uma vez que ele nem é declarado como variárel.
+
+            2- O componente app importado de google-maps-react é o objeto de mapa de fato do google. Marker é a ferramenta para pontilhar no mapa as latitudes e longitudes.
+
+            3- o atributo {google} definido em MapContainer é passado na prop ao atribuirmos o apiKey em MapContainer. Esse atributo tem todas as funções e métodos de places api e maps api, que foram por nós definidos no projeto do google cloud.
+
+            4- centerAroundCurrentLocation é um atributo que faz com que a renderização do mapa sete como local inicial o local do usuário. Caso o usuário não permita, é renderizado uma localização default
+
+            5- em GoogleApiWrapper é passado um objeto contendo alguns atributos de acordo com a documentação. No caso usamos apenas a apiKey e language. À apiKey estamos definindo a chave que geramos na criação do nosso projeto no google cloud e que colocamos no documento projeto/.env. Esse documento não deve subir para o github, por isso colocamos no gitignore.
+
+    3- exportamos Map pelo components/index.js
+
+    4- importamos Map de components/index.js no index da home e tiramos a tag de estilo Map, para não causar duplicidade.
+
+Início da busca por restaurantes próximos
+
+    projetos\restaurants-search\aulas\imagens\atualizaMapa1.PNG
+
+    projetos\restaurants-search\aulas\imagens\atualizaMapa2.PNG
+
+        1- em onMapReady entendo que map já venha implícito na chamada da função, sendo o objeto Map importado de google-maps-react, e que é de onde a função é chamada.
+
+Concluindo a busca de restaurantes e introdução ao Redux
+
+    1- criar a função searchByQuery(query) em components/Map/index.jsx/MapContainer
+
+        projetos\restaurants-search\aulas\imagens\functionSearchByQuery.PNG
+    
+    2- crio no index da home const [query, setQuery] = useState(null)
+    
+    3- crio no index da home uma função
+        
+        function handleKeyPress(e){
+            if(e.key === 'Enter'){
+                setQuery(inputValue)
+            }
+        }
+    
+    4- no Input coloco o atributo onKeyPress={handleKeyPress}
+
+    5- passo a propriedade query={query} na tag <Map> no index da home
+
+    6- no index do componente Map, pego a query como destructuring da prop dentro do const MapContainer
+
+    7- importo useEffect from react. O useEffect será usado para rerenderizar o mapa quando for passada a query pela caixa de pesquisa. O mapa será renderizado baseando-se nessa pesquisa. O useEffect percebe uma mudança em alguma variável e executa um comando baseado na existência dessa mudança.
+
+    8- crio o useEffect para observar a query. O useEffect estará logo após o destructuring da prop
+
+        useEffect(() => {
+            if(query){
+                searchByQuery(query)
+            }
+        }, [query])
+
+Início implementação do redux
+
+    1- instalação do redux e react-redux
+
+        npm i redux
+        npm i react-redux
+
+    2- criar 
+        src/redux/modules
+        src/redux/reducers
+        src/redux/reducers/index.js
+        src/redux/store.js
+
+    3- em store.js
+
+        projetos\restaurants-search\aulas\imagens\storeRedux.PNG
+
+        1- vai guardar os estados dos reducers
+
+    4- em src/redux/reducers/index.js
+
+        projetos\restaurants-search\aulas\imagens\combineReducersRedux.PNG
+
+        1- o combineReducers vai combinar todos os estados passados por um usuário para que isso seja encapsulado em um "objeto" a ser armazenado na nossa store.
+
+    5- em src/App.js
+
+        import {Provider} from 'react-redux';
+
+        import store from './redux/store';
+
+        projetos\restaurants-search\aulas\imagens\providerReduxSrcAppJs.PNG        
+
+Implementação do Marker
+
+    Parte 1
+
+        1- criar src/redux/modules/restaurants.js
+
+            projetos\restaurants-search\aulas\imagens\reduxModulesRestaurants.png
+
+            0- alterar de restaurant para restaurantSelected na linha 16
+
+            1- quando estamos trabalhando com redux, temos nosso estado inicial, nossa função redutora (reducer), actionCreators
+
+            2- a função reducer recebe como parametros o estado (state) e a action.
+
+        2-  ir no componente de mapa e import {useDispatch} from 'react-redux' e importar {setRestaurants} de src/redux/modules/restaurants
+
+        3- ainda no componente de mapa declarar dispatch = useDispatch() logo no início da função de MapContainer (antes do useState)
+
+        4- ainda no componente de mapa, em service.nearbySearch e em service.textSearch acrescentar abaixo do console.log >> dispatch(setRestaurants(results)) <<
+
+    Parte 2
+
+        1-  na tag Map componente de mapa fazemos
+
+            projetos\restaurants-search\aulas\imagens\mapMarker.PNG
+
+        2- apagar os console.log do componente de mapa
+
+        3- importar useSelector de react-redux
+
+        4- abaixo da declaração de dispatch fazer 
+
+            const {restaurants} = useSelector((state) => state.restaurants);
+
+            Nesse ponto já deve estar marcando os pontos de restaurantes perto de mim e também marcando os que eu pesquisar
+
+        5- ir no index da home e dar a mesma declaração de (4) dentro da função home abaixo dos useStates e importar o useSelector do react-redux na segunda linha do documento
+
+        6- em baixo de <Search> na home trocamos <RestaurantCard/> por
+
+            projetos\restaurants-search\aulas\imagens\novoRestaurantCard.PNG
+
+        7- em RestaurantCard fazemos
+
+            projetos\restaurants-search\aulas\imagens\RestaurantCardRefatorado.PNG
+
+        8- alteramos o carousel da home
+
+            projetos\restaurants-search\aulas\imagens\novoCarousel.PNG
+
+Detalhes do restaurante
+
+    Parte 1
+
+        0- importar setRestaurant from modules/restaurants
+
+        1- criar a função getRestaurantById no componente de mapa
+
+            projetos\restaurants-search\aulas\imagens\mapGetRestaurantById.PNG
+
+        2- declarar o atributo placeId do destructuring de props no MapContainer do componente de mapa
+
+        3- criar um useEffect
+
+            useEffect(() => {
+                if(placeId){
+                    getRestaurantById(placeId)
+                }
+            }, [placeId])
+
+        4- como atributo da tag <Map> passar {...props}
+
+    Parte 2
+
+        1- no index da home declarar restaurantSelected junto a restaurants na atribuição do useSelector
+
+        2- declarar [placeId, setPlaceId] = useState(null)
+
+        3- criar a função 
+            
+            handleOpenModal(placeId){
+                setPlaceId(placeId)
+                setModalOpened(true)
+            }
+
+        4- atribuir onClick={() => handleOpenModal(restaurant.place_id)} na tag RestaurantCard
+
+        5- passar a prop placeId={placeId} na tag Map
+
+        6- habilitar a tag Modal
+
+            1- setar falso como initialState do modal
+
+        7- no componente RestaurantCard receber o evento de click e na sua tag Restaurant declarar onClick={onClick}
+
+        8- criar os estilos de p, ModalTitle e ModalContent para a home, importando esses estilos para a o index da home
+
+            projetos\restaurants-search\aulas\imagens\modalTitleModalContent.PNG
+
+        9- refatorar a tag <Modal> no index da home
+
+            projetos\restaurants-search\aulas\imagens\novoModalHome.PNG
+
+            1- o uso do ponto de interrogação em restaurantSelected? é uma aplicação da nova versão do ecmascript, que serve para não quebrar o código caso o parâmetro seja null ou undefined. O Babel do creat-react-app está hablitado para transpilar isso para uma versão mais antiga do js
+
+Componente Skeleton e react-lottie
+
+    Parte 1
+
+        1- instalar o react-lottie
+
+            npm i react-lottie
+
+        2- criar components/Loader/index.jsx
+
+            projetos\restaurants-search\aulas\imagens\componentLoader.PNG
+
+        3- exportar Loader pelo components/index.js
+
+        4- importar Loader no index da home
+
+        5- na index da home Substituir Carousel por
+
+            projetos\restaurants-search\aulas\imagens\novoCarouselLoader.PNG
+
+        6- no componente do mapa dar um dispatch(setRestaurant(null)) no segunda linha da função getRestaurantById, da searchByQuery e da searchNearby
+
+    Parte 2
+        
+        1- criar o componente chamado Skeleton
+
+            projetos\restaurants-search\aulas\imagens\skeleton.PNG
+
+        2- exportar como Skeleton pelo index dos componentes
+
+        3- importar o componente Skeleton no index da home
+
+        4- refatorar o inner da tag <Modal> 
+
+            projetos\restaurants-search\aulas\imagens\novoModalSkeleton.PNG
+
+    Parte 3
+
+        1- em RestaurantCard chamar o useState do react e chamar Skeleton
+
+        2- criar dentro da const RestaurantCard a const [imageLoaded, setImageLoaded] = useState(false)
+
+        3- alterar o retorno de RetaurantCard
+
+            projetos\restaurants-search\aulas\imagens\SkeletonRestaurantCard.PNG
+
+        4- acrescentar a seguinte linha no estilo RestaurantPhoto, que é um estilo do RestaurantCard
+
+            projetos\restaurants-search\aulas\imagens\skeletonRestaurantPhoto.PNG
+
+        5- no ImageCard, chamar useState e useEffect e importar Skeleton
+        
+        6- alterar o const ImageCard
+
+            projetos\restaurants-search\aulas\imagens\SkeletonImageCard.PNG
+
+Conclusão e deploy na nuvem com netlify
+
+    1- subir o projeto para o github 
+    
+    2- entrar no netlify
+
+    3- criar novo site from git
+
+    4- em Continuous Deployment estou usando github
+
+    5- escolho o projeto que eu quero "deployar"
+
+    6- coloco npm run build como build command
+
+    7- na public directory deixamos build
+
+    8- vamos em show advanced settings e definimos uma nova variável REACT_APP_GOOGLE_API_KEY e CI = false
+
