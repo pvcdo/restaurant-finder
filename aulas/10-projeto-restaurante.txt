@@ -635,12 +635,10 @@ Componente Skeleton e react-lottie
 
             projetos\restaurants-search\aulas\imagens\SkeletonImageCard.PNG
 
-        
+Conclusão e deploy na nuvem com netlify
 
-        
-        
+    1- entrar no netlify
 
+    2- criar novo site from git
 
-
-        
-
+    
